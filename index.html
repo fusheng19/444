@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>随机好评文案</title>
+<style>
+/* 遮罩层样式 */
+.weixin-tip {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    height: 100%;
+    width: 100%;
+    z-index: 100;
+}
+
+.weixin-tip p {
+    text-align: center;
+    margin-top: 10%;
+    padding: 0 5%;
+    font-size: 16px;
+    color: #fff;
+}
+
+/* 你的页面样式 */
+/* ... 其他样式 ... */
+</style>
+<script>
+// 你的随机文案函数
+function getRandomText() {
+    var texts = [
+        "这家酒店的环境真是太棒了！从舒适的房间到美味的早餐，每一处都让人满意。特别感谢姝涵女士的贴心服务，让我们的住宿更加完美！",
+        // ... 其他文案 ...
+    ];
+    var randomIndex = Math.floor(Math.random() * texts.length);
+    document.getElementById("randomText").innerText = texts[randomIndex];
+}
+
+// 检测是否在微信内打开
+function isWeixin() {
+    var ua = navigator.userAgent.toLowerCase();
+    if (ua.match(/MicroMessenger/i) == "micromessenger") {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+// 页面加载时执行
+window.onload = function() {
+    getRandomText();
+    if (isWeixin()) {
+        document.querySelector(".weixin-tip").style.display = "block";
+    }
+}
+</script>
+</head>
+<body>
+<!-- 遮罩层 -->
+<div class="weixin-tip">
+    <p>请点击右上角<br>选择在浏览器中打开</p >
+</div>
+
+<!-- 你的页面内容 -->
+<h1>您的专属好评文案：</h1>
+<p id="randomText"></p >
+
+</body>
+</html>
